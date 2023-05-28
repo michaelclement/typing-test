@@ -37,6 +37,7 @@ export default function TextLineComponent(props) {
   });
 
   useEffect(() => {
+    // When a word is completed, scroll the next one to center of screen
     scrollRef.current.scrollIntoView({
       behavior: 'auto',
       block: 'center',

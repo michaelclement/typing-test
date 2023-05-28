@@ -57,8 +57,6 @@ function App() {
 
   return (
     <div className="App w-[100vw] h-[100vh]" ref={container} tabIndex={0} autoFocus onKeyDown={handleKeyDown}>
-      {/* TODO: typing test parent component? */}
-      {/* TODO: Come up with an interseting animated way fro text to be delivered */}
       <TextLineComponent
         currentWord={currentWord}
         currentLetter={currentLetter}
@@ -66,7 +64,7 @@ function App() {
         isSpace={isSpace}>
       </TextLineComponent>
 
-      {/* if user presses a key that's not the current letter, tell them */}
+      {/* Display wrong keypresses here */}
       <div className='absolute top-[57%] left-[calc(50%-25px)] w-[50px] h-[50px]'>
         {(badKey != '' ?
           <div className='text-center text-white text-2xl rounded p-[10px] bg-zinc-800'>
