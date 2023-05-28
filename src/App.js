@@ -31,9 +31,8 @@ function App() {
     if (event.key == words.words[currentWord][currentLetter]) {
       if (nextLetterIndex > getWordBoundary()) {
         setIsSpace(true);
-        console.log("Is space");
-        console.log("cl:", currentLetter)
-        console.log("cw:", currentWord)
+        // TODO: set word to a green so we know it was typed
+        setCurrentLetter(nextLetterIndex)
       } else {
         setCurrentLetter(nextLetterIndex);
       }
@@ -48,15 +47,16 @@ function App() {
 
   return (
     <div className="App" ref={container} tabIndex={0} autoFocus onKeyDown={handleKeyDown}>
-      <Header></Header>
       {/* TODO: typing test parent component? */}
       {/* TODO: Come up with an interseting animated way fro text to be delivered */}
+      <Header></Header>
       <TextLineComponent
         currentWord={currentWord}
         currentLetter={currentLetter}
         words={words.words}
         isSpace={isSpace}>
       </TextLineComponent>
+      <h1>Words Completed: {currentWord}</h1>
     </div>
   );
 }
