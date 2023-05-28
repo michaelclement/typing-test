@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useEffect } from "react";
 
 export default function TimerComponent(props) {
   useEffect(() => {
@@ -16,8 +16,8 @@ export default function TimerComponent(props) {
   return (
     <div className='text-zinc-600'>
       {(props.isActive ?
-        <p>Elapsed time: <span>{props.seconds}</span></p>
-        : 'Timer not started.')}
+        <p>Elapsed time: <span>{props.seconds}s</span></p>
+        : 'Type a key to begin.')}
     </div>
   );
 }

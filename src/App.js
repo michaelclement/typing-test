@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import Header from './components/HeaderComponent';
 import TextLineComponent from './components/TextLineComponent';
 import TimerComponent from "./components/TimerComponent";
 
@@ -23,12 +22,7 @@ function App() {
     container.current.focus();
   }, [])
 
-  function getWordBoundary() {
-    return words.words[currentWord].length - 1;
-  }
-
   function handleKeyDown(event) {
-    // TODO: handle backspace?
     let nextLetterIndex = currentLetter + 1;
 
     // if it's our first keypress, start timer
@@ -41,7 +35,7 @@ function App() {
     // If they hit the right key, check if next char is space
     // and then advance
     if (event.key == words.words[currentWord][currentLetter]) {
-      if (nextLetterIndex > getWordBoundary()) {
+      if (nextLetterIndex > (words.words[currentWord].length - 1)) {
         setIsSpace(true);
         // TODO: set word to a green so we know it was typed
         setCurrentLetter(nextLetterIndex)
@@ -81,9 +75,12 @@ function App() {
           : '')}
       </div>
 
-      <div className='flex justify-between align-center content-center absolute bottom-[15px] w-[calc(100%-30px)] mx-[15px]'>
+      <div className='flex justify-between align-center content-center 
+        absolute bottom-[15px] w-[calc(100%-30px)] mx-[15px]'>
+
         <TimerComponent isActive={timer} seconds={seconds} setSeconds={setSeconds}></TimerComponent>
-        <h1 className='text-zinc-600'>Words Completed: {currentWord}</h1>
+        <p className='text-zinc-600'>Words Completed: {currentWord}</p>
+
       </div>
 
     </div>
