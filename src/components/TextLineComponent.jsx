@@ -11,7 +11,7 @@ export default function TextLineComponent(props) {
       <p ref={(wIndex == props.currentWord ? scrollRef : undefined)}
         className={
           (wIndex == props.currentWord ?
-            'text-white rounded bg-blue-400 shadow-lg shadow-blue-500/50' :
+            'text-white rounded bg-blue-400 shadow-lg shadow-blue-500/50 text-4xl flex items-center justify-center pb-[5px] px-[5px]' :
             (wIndex < props.currentWord ? 'text-zinc-400' : 'text-zinc-600')
           ) + ' flex flex-row px-[2px] pl-[4px]'} key={`${wIndex}`}>
 
@@ -20,12 +20,10 @@ export default function TextLineComponent(props) {
             (lIndex == props.currentLetter && wIndex == props.currentWord ?
               '' :
               (lIndex < props.currentLetter && wIndex == props.currentWord ?
-                'text-zinc-500' : ''))
+                'text-zinc-700' : ''))
             + ' flex flex-row'
           }>{letter}</span>)
         })}
-
-        <span>&nbsp;</span>
       </p>
     )
   });
@@ -39,8 +37,8 @@ export default function TextLineComponent(props) {
   }, [props.currentWord]);
 
   return (
-    <div className="w-full h-[100px] bg-zinc-200 flex max-w-full overflow-auto pointer-events-none">
-      <div className='pl-[50vw] flex flex-row items-center'>
+    <div className="w-full h-full bg-zinc-200 flex max-w-full overflow-auto pointer-events-none">
+      <div className='pl-[47vw] flex flex-row items-center'>
         {wordList}
       </div>
     </div>
