@@ -2,14 +2,19 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import Header from './components/HeaderComponent';
 import TextLineComponent from './components/TextLineComponent';
+import TimerComponent from "./components/TimerComponent";
 
 import words from './assets/lipsum.json';
 
 function App() {
+  // Typing progress state
   const [currentWord, setCurrentWord] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(0);
   const [isSpace, setIsSpace] = useState(false);
   const [badKey, setBadKey] = useState('');
+  // Timer state
+  const [timer, setTimer] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
   const container = useRef();
 
@@ -25,6 +30,11 @@ function App() {
   function handleKeyDown(event) {
     // TODO: handle backspace?
     let nextLetterIndex = currentLetter + 1;
+
+    // if it's our first keypress, start timer
+    if (currentWord == 0 && currentLetter == 0) {
+      setTimer(true);
+    }
 
     setBadKey('');
 
@@ -62,8 +72,6 @@ function App() {
         isSpace={isSpace}>
       </TextLineComponent>
 
-      <h1 className='absolute bottom-[15px] right-[15px] text-zinc-600 font-bold'>Words Completed: {currentWord}</h1>
-
       {/* if user presses a key that's not the current letter, tell them */}
       <div className='absolute top-[57%] left-[calc(50%-25px)] w-[50px] h-[50px]'>
         {(badKey != '' ?
@@ -71,6 +79,11 @@ function App() {
             {badKey}
           </div>
           : '')}
+      </div>
+
+      <div className='flex justify-between align-center content-center absolute bottom-[15px] w-[calc(100%-30px)] mx-[15px]'>
+        <TimerComponent isActive={timer} seconds={seconds} setSeconds={setSeconds}></TimerComponent>
+        <h1 className='text-zinc-600'>Words Completed: {currentWord}</h1>
       </div>
 
     </div>
