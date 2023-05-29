@@ -6,6 +6,10 @@ export default function TimerComponent(props) {
     if (props.isActive) {
       interval = setInterval(() => {
         props.setSeconds(props.seconds + 1);
+        if (props.seconds >= props.timeLimit) {
+          props.setTimer(false);
+          props.calculateScore();
+        }
       }, 1000);
     } else if (!props.isActive && props.seconds !== 0) {
       clearInterval(interval);

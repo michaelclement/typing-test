@@ -5,17 +5,23 @@ import TimerComponent from "./components/TimerComponent";
 
 import words from './assets/lipsum.json';
 
-function App() {
+export default function App() {
   // Typing progress state
   const [currentWord, setCurrentWord] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(0);
   const [isSpace, setIsSpace] = useState(false);
   const [badKey, setBadKey] = useState('');
+  const [score, setScore] = useState(0);
   // Timer state
   const [timer, setTimer] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
   const container = useRef();
+  const timeLimit = 45; // in seconds
+
+  function calculateScore() {
+    setScore(currentWord / (timeLimit / 60)); // get words per minute
+  }
 
   useEffect(() => {
     // Automatically set focus on App so we can listen for keystrokes
@@ -76,13 +82,19 @@ function App() {
       <div className='flex justify-between align-center content-center 
         absolute bottom-[15px] w-[calc(100%-30px)] mx-[15px]'>
 
-        <TimerComponent isActive={timer} seconds={seconds} setSeconds={setSeconds}></TimerComponent>
+        <TimerComponent
+          isActive={timer}
+          setTimer={setTimer}
+          seconds={seconds}
+          setSeconds={setSeconds}
+          calculateScore={calculateScore}
+          timeLimit={timeLimit}>
+        </TimerComponent>
+
+        {/* TODO: add HTML dialog when round is over/display the score */}
+
         <p className='text-zinc-600'>Words Completed: {currentWord}</p>
-
       </div>
-
     </div>
   );
 }
-
-export default App;
