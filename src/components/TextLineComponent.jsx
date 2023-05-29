@@ -1,4 +1,5 @@
 import { React, useRef, useEffect } from "react";
+import 'animate.css';
 
 export default function TextLineComponent(props) {
   /**
@@ -20,7 +21,10 @@ export default function TextLineComponent(props) {
           (wIndex == props.currentWord ?
             'text-white rounded bg-blue-400 shadow-lg shadow-blue-500/50 text-4xl \
             flex items-center justify-center pb-[5px] px-[5px]' :
-            (wIndex < props.currentWord ? 'text-zinc-400' : 'text-zinc-600')
+            // after it's been typed:
+            (wIndex < props.currentWord ? 'text-zinc-400 animate__animated \
+              animate__rotateOutDownRight animate__delay-3s animate__slower' :
+              'text-zinc-600')
           ) + ' flex flex-row px-[2px] pl-[4px]'} key={`${wIndex}`}>
 
         {[...word].map((letter, lIndex) => {

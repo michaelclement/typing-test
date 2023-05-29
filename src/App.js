@@ -49,7 +49,7 @@ function App() {
     } else {
       // If they press a wrong key, display (unless it's a modifier key)
       if (['Meta', 'Shift', 'Tab', 'CapsLock', ' ', 'Backspace', 'Control',
-        'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'Alt'].indexOf(event.key) < 0) {
+        'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'Alt', 'Enter'].indexOf(event.key) < 0) {
         setBadKey(event.key);
       }
     }
