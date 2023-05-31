@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import TextLineComponent from './components/TextLineComponent';
-import TimerComponent from "./components/TimerComponent";
+import TextLineComponent from './TextLineComponent';
+import TimerComponent from "./TimerComponent";
 
-import words from './assets/lipsum.json';
+import words from '../assets/lipsum.json';
 
 export default function App() {
   // Typing progress state
@@ -16,7 +16,7 @@ export default function App() {
   const [timer, setTimer] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
-  const container = useRef();
+  const container = useRef<HTMLDivElement>(null);
   const timeLimit = 45; // in seconds
 
   function calculateScore() {
@@ -25,10 +25,12 @@ export default function App() {
 
   useEffect(() => {
     // Automatically set focus on App so we can listen for keystrokes
-    container.current.focus();
+    if (container.current != null) {
+      container.current.focus();
+    }
   }, [])
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event:any) {
     let nextLetterIndex = currentLetter + 1;
 
     // if it's our first keypress, start timer
@@ -40,6 +42,7 @@ export default function App() {
 
     // If they hit the right key, check if next char is space
     // and then advance
+    console.log(words.words);
     if (event.key == words.words[currentWord][currentLetter]) {
       if (nextLetterIndex > (words.words[currentWord].length - 1)) {
         setIsSpace(true);

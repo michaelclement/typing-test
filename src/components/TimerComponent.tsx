@@ -1,8 +1,9 @@
-import { React, useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 
-export default function TimerComponent(props) {
+export default function TimerComponent(props:any) {
   useEffect(() => {
-    let interval = null;
+    let interval:any = null;
     if (props.isActive) {
       interval = setInterval(() => {
         props.setSeconds(props.seconds + 1);

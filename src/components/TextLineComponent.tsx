@@ -1,7 +1,8 @@
-import { React, useRef, useEffect } from "react";
+import React from "react";
+import { useRef, useEffect } from "react";
 import 'animate.css';
 
-export default function TextLineComponent(props) {
+export default function TextLineComponent(props:any) {
   /**
    * PROPS:
    * - words [<string>]      : a list of words
@@ -10,11 +11,11 @@ export default function TextLineComponent(props) {
   */
 
   // Used to scroll the current word to center of screen
-  const scrollRef = useRef();
+  const scrollRef:any = useRef();
 
   // Wrap all words in <p> and all letters in <span> so we can
   // automatically color them based on context
-  const wordList = props.words.map((word, wIndex) => {
+  const wordList = props.words.map((word:string, wIndex:number) => {
     return (
       <p ref={(wIndex == props.currentWord ? scrollRef : undefined)}
         className={

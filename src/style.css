@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Example of bundling a bunch of tailwind classes into a single reusable class:*/
+@layer components {
+  .primary-btn {
+    @apply bg-blue-950 w-[120px] h-[35px] text-white rounded-lg p-[3px] my-[5px] 
+  }
+}
