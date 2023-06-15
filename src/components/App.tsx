@@ -18,7 +18,7 @@ export default function App() {
 
   const container = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const timeLimit = 2; // in seconds
+  const timeLimit = 60; // in seconds
 
   function calculateScore() {
     setScore(currentWord / (timeLimit / 60)); // get words per minute
