@@ -1,5 +1,8 @@
-# React/Webpack 
-Basic React app with TypeScript and Tailwind. It uses webpack
+# Typing Test React Application
+This application is a typing speed test. The term "test" is used here 
+very loosely. 
+
+It is build with React using TypeScript and Tailwind. It uses webpack
 to statically bundle all JS resources, including a minified production
 version of React so that we can just drop it in and serve
 it from anywhere.

@@ -17,10 +17,14 @@ export default function App() {
   const [seconds, setSeconds] = useState(0);
 
   const container = useRef<HTMLDivElement>(null);
-  const timeLimit = 45; // in seconds
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const timeLimit = 2; // in seconds
 
   function calculateScore() {
     setScore(currentWord / (timeLimit / 60)); // get words per minute
+    if (dialogRef.current != null) {
+      dialogRef.current.showModal();
+    }
   }
 
   useEffect(() => {
@@ -30,11 +34,16 @@ export default function App() {
     }
   }, [])
 
-  function handleKeyDown(event:any) {
+  function handleKeyDown(event: any) {
     let nextLetterIndex = currentLetter + 1;
 
     // if it's our first keypress, start timer
     if (currentWord == 0 && currentLetter == 0) {
+      if (dialogRef.current != undefined && dialogRef.current.open) {
+        // Dialog is open cause they've already completed a round.
+        // Don't let them start a new round.
+        return;
+      };
       setTimer(true);
     }
 
@@ -95,6 +104,21 @@ export default function App() {
         </TimerComponent>
 
         {/* TODO: add HTML dialog when round is over/display the score */}
+        <dialog ref={dialogRef} className='rounded max-w-1/2 w-[400px] text-center text-zinc-400'>
+          <h2 className='text-xl text-zinc-500 font-bold'>Finished.</h2>
+          <p>You typed {score} WPM</p>
+
+          {/* Stupid hack. Having an empty button here prevents the "ok" 
+          button from being default selected and subsequently automatically
+          dismissed if the user is still typing when the modal pops up and hits 
+          the spacebar. */}
+          <button></button>
+
+          <form method='dialog' className='flex justify-end'>
+            <button onClick={() => window.location.reload()}
+              className='text-white rounded bg-blue-400 shadow-lg shadow-blue-500/50 px-[13px] py-[4px]'>Ok</button>
+          </form>
+        </dialog>
 
         <p className='text-zinc-600'>Words Completed: {currentWord}</p>
       </div>
